@@ -1,8 +1,14 @@
+<div align="center">
+
 # EDITScope
 
-*Create freely. Use responsibly.*
+### Create freely. Use responsibly.
 
-A rights-aware editing and asset-compliance workspace. EDITScope compares each asset's **recorded** permission with how a project will actually be used, then turns every conflict into the smallest edit that fixes it.
+<p>Ruang kerja editing sadar-hak: mencocokkan izin aset yang tercatat dengan pemakaian proyek yang sebenarnya, lalu menyarankan perbaikan terkecil.</p>
+
+<p><img src="https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white&labelColor=3a3f47" alt="React 18"> <img src="https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white&labelColor=3a3f47" alt="TypeScript 5"> <img src="https://img.shields.io/badge/Vite-5-646CFF?logo=vite&logoColor=white&labelColor=3a3f47" alt="Vite 5"> <img src="https://img.shields.io/badge/Tailwind-3-38BDF8?logo=tailwindcss&logoColor=white&labelColor=3a3f47" alt="Tailwind 3"> <img src="https://img.shields.io/badge/mode-demo%20%28data%20fiktif%29-d4a017?labelColor=3a3f47" alt="mode demo (data fiktif)"> <img src="https://img.shields.io/badge/license-MIT-1e3a8a?labelColor=3a3f47" alt="license MIT"></p>
+
+</div>
 
 ![EDITScope landing page](docs/screenshots/01-landing.jpg)
 
