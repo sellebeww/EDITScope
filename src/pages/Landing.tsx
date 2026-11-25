@@ -170,7 +170,7 @@ function LiveCheck() {
   }, [f])
   const overall = statusOf(rows.flatMap(r => r.issues))
   return (
-    <div className="grid lg:grid-cols-[360px_1fr] gap-5 items-start">
+    <div className="grid grid-cols-[minmax(0,1fr)] lg:grid-cols-[360px_1fr] gap-5 items-start">
       <div className="card p-5 space-y-4 lg:sticky lg:top-20">
         <div className="flex items-center justify-between"><h3 className="font-semibold">Intended usage</h3>
           <button className="text-xs text-info inline-flex items-center gap-1 hover:underline" onClick={() => setF(DEFAULT)}><RotateCcw size={12} aria-hidden />Reset</button></div>
@@ -253,7 +253,7 @@ export default function Landing() {
         <div className="absolute inset-0 opacity-[.07]" aria-hidden style={{ backgroundImage: 'linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px)', backgroundSize: '44px 44px', maskImage: 'radial-gradient(ellipse at 30% 30%,#000,transparent 70%)', WebkitMaskImage: 'radial-gradient(ellipse at 30% 30%,#000,transparent 70%)' }} />
         <div className="absolute -top-32 -right-24 h-96 w-96 rounded-full bg-info/25 blur-3xl float" aria-hidden />
         <div className="absolute -bottom-40 -left-20 h-96 w-96 rounded-full bg-[#2F7BFF]/20 blur-3xl" aria-hidden />
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-[1.05fr_1fr] gap-14 items-center">
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-[minmax(0,1fr)] lg:grid-cols-[1.05fr_1fr] gap-14 items-center">
           <div className="stagger">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/80"><span className="h-1.5 w-1.5 rounded-full bg-[#4ADE9B] pulse" aria-hidden />Rights-aware editing workspace</span>
             <h1 className="mt-5 text-4xl sm:text-5xl lg:text-[3.6rem] font-semibold tracking-tight leading-[1.05]">Create freely.<br /><span className="grad">Use responsibly.</span></h1>
@@ -307,7 +307,7 @@ export default function Landing() {
       <section id="how" className="text-white scroll-mt-16" style={{ background: 'linear-gradient(155deg,#17243A 0%,#223653 100%)' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-20 md:py-28">
           <R><p className="text-sm font-semibold text-[#6EA3F0] mb-3">How it works</p><h2 className="text-3xl md:text-4xl font-semibold tracking-tight leading-[1.12] max-w-2xl">Seven steps from brief to client-ready report.</h2></R>
-          <R className="mt-10 grid lg:grid-cols-[320px_1fr] gap-6">
+          <R className="mt-10 grid grid-cols-[minmax(0,1fr)] lg:grid-cols-[320px_1fr] gap-6">
             <ol className="space-y-1.5">{STEPS.map((x, i) => (
               <li key={x.t}><button onClick={() => setStep(i)} aria-current={i === step} className={`w-full flex items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm transition-all ${i === step ? 'bg-white text-navy shadow-lg translate-x-1' : 'text-white/70 hover:bg-white/5'}`}>
                 <span className={`grid h-7 w-7 place-items-center rounded-full text-xs font-semibold shrink-0 ${i === step ? 'bg-navy text-white' : 'bg-white/10'}`}>{i < step ? <Check size={13} /> : i + 1}</span>{x.t}</button></li>))}</ol>

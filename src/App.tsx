@@ -1,19 +1,22 @@
-import { useEffect, useState } from 'react'
+import { Suspense, lazy, useEffect, useState } from 'react'
 import { Link, NavLink, Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import { Bell, ChevronsLeft, ChevronsRight, FileText, FolderKanban, Gauge, HelpCircle, Image, LifeBuoy, LogOut, Menu, Scale, Search, Settings, ShieldCheck } from 'lucide-react'
 import { useApp } from './store'
 import { Avatar, LogoMark, Modal } from './ui'
 import { Login, Onboarding, Register } from './pages/Auth'
-import Overview from './pages/Overview'
-import Projects from './pages/Projects'
-import ProjectDetail from './pages/ProjectDetail'
-import Library from './pages/Library'
-import { PermissionDetail, Permissions } from './pages/Permissions'
-import ReviewCenter from './pages/Review'
-import Reports from './pages/Reports'
-import Team from './pages/Team'
-import Notifications from './pages/Notifications'
 import Landing from './pages/Landing'
+
+// Workspace pages load on demand so the landing page and Recharts stay out of the first bundle.
+const Overview = lazy(() => import('./pages/Overview'))
+const Projects = lazy(() => import('./pages/Projects'))
+const ProjectDetail = lazy(() => import('./pages/ProjectDetail'))
+const Library = lazy(() => import('./pages/Library'))
+const Permissions = lazy(() => import('./pages/Permissions').then(m => ({ default: m.Permissions })))
+const PermissionDetail = lazy(() => import('./pages/Permissions').then(m => ({ default: m.PermissionDetail })))
+const ReviewCenter = lazy(() => import('./pages/Review'))
+const Reports = lazy(() => import('./pages/Reports'))
+const Team = lazy(() => import('./pages/Team'))
+const Notifications = lazy(() => import('./pages/Notifications'))
 
 const NAV = [
   { to: '/', label: 'Overview', icon: Gauge }, { to: '/projects', label: 'Projects', icon: FolderKanban }, { to: '/library', label: 'Asset Library', icon: Image },
@@ -66,8 +69,8 @@ function Shell() {
         <header className="h-16 bg-white/85 backdrop-blur border-b border-line flex items-center gap-2 sm:gap-3 px-4 sm:px-6 lg:px-8 sticky top-0 z-20">
           <button className="md:hidden grid h-10 w-10 -ml-2 place-items-center rounded-lg hover:bg-bg" aria-label="Menu" onClick={() => setMobile(true)}><Menu size={20} /></button>
           <nav aria-label="Breadcrumb" className="text-sm flex items-center gap-2 min-w-0 truncate">
-            <Link to="/" className="text-muted hover:text-navy">Home</Link>
-            {crumbs.map((c, i) => <span key={c.to} className="flex items-center gap-1.5 min-w-0"><span className="text-muted">/</span>{i === crumbs.length - 1 ? <span className="font-medium truncate">{c.label}</span> : <Link to={c.to} className="text-muted hover:text-navy">{c.label}</Link>}</span>)}
+            <Link to="/" className="text-muted hover:text-navy shrink-0">Home</Link>
+            {crumbs.map((c, i) => <span key={c.to} className={`flex items-center gap-1.5 ${i === crumbs.length - 1 ? "min-w-0" : "shrink-0"}`}><span className="text-muted">/</span>{i === crumbs.length - 1 ? <span className="font-medium truncate">{c.label}</span> : <Link to={c.to} className="text-muted hover:text-navy">{c.label}</Link>}</span>)}
           </nav>
           <form className="ml-auto relative hidden sm:block" onSubmit={e => { e.preventDefault(); const q = new FormData(e.currentTarget).get('q') as string; nav(`/library?q=${encodeURIComponent(q)}`) }}>
             <Search size={16} className="absolute left-3.5 top-3 text-muted" /><input name="q" className="input pl-10 w-64 lg:w-72 bg-bg/60" placeholder="Search assets…  ( / )" aria-label="Global search" />
@@ -85,12 +88,12 @@ function Shell() {
             </div>}
           </div>
         </header>
-        <main key={loc.pathname} className="anim-page p-4 sm:p-6 lg:p-8 max-w-[1360px] mx-auto"><Routes>
+        <main key={loc.pathname} className="anim-page p-4 sm:p-6 lg:p-8 max-w-[1360px] mx-auto"><Suspense fallback={<p className="text-sm text-muted" role="status">Loading…</p>}><Routes>
           <Route path="/" element={<Overview />} /><Route path="/projects" element={<Projects />} /><Route path="/projects/:id" element={<ProjectDetail />} />
           <Route path="/library" element={<Library />} /><Route path="/permissions" element={<Permissions />} /><Route path="/permissions/:id" element={<PermissionDetail />} />
           <Route path="/review" element={<ReviewCenter />} /><Route path="/reports" element={<Reports />} /><Route path="/team" element={<Team />} /><Route path="/notifications" element={<Notifications />} />
           <Route path="*" element={<Navigate to="/" />} />
-        </Routes></main>
+        </Routes></Suspense></main>
       </div>
       {help && <Modal title="Help Center" onClose={() => setHelp(false)}>
         <div className="space-y-4 text-sm text-slate2 leading-relaxed">

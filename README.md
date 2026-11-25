@@ -6,7 +6,7 @@
 
 <p>Ruang kerja editing sadar-hak: mencocokkan izin aset yang tercatat dengan pemakaian proyek yang sebenarnya, lalu menyarankan perbaikan terkecil.</p>
 
-<p><img src="https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white&labelColor=3a3f47" alt="React 18"> <img src="https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white&labelColor=3a3f47" alt="TypeScript 5"> <img src="https://img.shields.io/badge/Vite-5-646CFF?logo=vite&logoColor=white&labelColor=3a3f47" alt="Vite 5"> <img src="https://img.shields.io/badge/Tailwind-3-38BDF8?logo=tailwindcss&logoColor=white&labelColor=3a3f47" alt="Tailwind 3"> <img src="https://img.shields.io/badge/mode-demo%20%28data%20fiktif%29-d4a017?labelColor=3a3f47" alt="mode demo (data fiktif)"> <img src="https://img.shields.io/badge/license-MIT-1e3a8a?labelColor=3a3f47" alt="license MIT"></p>
+<p><img src="https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white&labelColor=3a3f47" alt="React 18"> <img src="https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white&labelColor=3a3f47" alt="TypeScript 5"> <img src="https://img.shields.io/badge/Vite-5-646CFF?logo=vite&logoColor=white&labelColor=3a3f47" alt="Vite 5"> <img src="https://img.shields.io/badge/Tailwind-3-38BDF8?logo=tailwindcss&logoColor=white&labelColor=3a3f47" alt="Tailwind 3"> <img src="https://img.shields.io/badge/mode-demo%20%28data%20fiktif%29-d4a017?labelColor=3a3f47" alt="mode demo (data fiktif)"> <img src="https://img.shields.io/badge/license-all%20rights%20reserved-1e3a8a?labelColor=3a3f47" alt="license: all rights reserved"></p>
 
 <p><a href="https://editscope.vercel.app"><b>Lihat demo langsung &rarr;</b></a></p>
 </div>
@@ -39,7 +39,9 @@
 ```bash
 npm install
 npm run dev      # http://localhost:5173
-npm test         # rights-engine unit tests
+npm test         # rights-engine unit tests (Vitest)
+npx playwright install chromium   # once
+npm run test:e2e # browser smoke tests: sign-in, accept a recommendation, role limits
 npm run build    # typecheck + production build
 ```
 
@@ -52,7 +54,7 @@ Demo login: `dana@northstar.studio` (Admin), any password of 6+ characters. Use 
 - Accepting a recommendation changes the project and **re-runs** the check. It never marks a project compliant on its own.
 - A reviewer must verify permissions; documentation alone does not verify.
 
-Built with React, TypeScript, Vite, Tailwind CSS, React Router, Recharts and Vitest.
+Built with React, TypeScript, Vite, Tailwind CSS, React Router, Recharts, Vitest and Playwright. Workspace pages are code-split, and GitHub Actions runs type-check, unit tests, build and e2e on every push and pull request.
 
 ## Scope of this MVP
 
